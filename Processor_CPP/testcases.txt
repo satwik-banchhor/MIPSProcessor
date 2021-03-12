@@ -1,0 +1,30 @@
+//SUM TILL N
+//reg[1]=1,reg[3]=N, output in reg[16].
+label1 :
+add $s0 $zero $zero
+add $v0 $zero $zero
+label2 :
+add $v0 $v0 $at
+add $s0 $s0 $v0
+beq $v0 $v1 label3
+j label2
+label3 :
+
+//STORE FIRST N FIBONACCI IN MEMORY
+//reg[1]=0, reg[2]=1, reg[3]=N, output in memory from 4096 to 4096-N+1
+label1 :
+sub $sp $sp $at
+sw $a0 0 $sp
+sub $sp $sp $at
+sw $a1 0 $sp
+add $v0 $v0 $at
+label2 :
+add $a2 $a1 $a0
+sub $sp $sp $at
+sw $a2 0 $sp
+lw $a0 1 $sp
+lw $a1 0 $sp
+add $v0 $v0 $at
+beq $v0 $v1 label3
+j label2
+label3 :

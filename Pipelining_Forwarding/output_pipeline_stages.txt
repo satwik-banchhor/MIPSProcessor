@@ -1,0 +1,705 @@
+Clock cycle 1
+WB Idle
+MEM Idle
+EXE Idle
+ID Idle
+IF fetching instruction 0-> sub $sp $sp $at
+Clock cycle 2
+WB Idle
+MEM Idle
+EXE Idle
+ID decoding instruction 0-> sub $sp $sp $at
+IF fetching instruction 1-> sw $a0 0 $sp
+Clock cycle 3
+WB Idle
+MEM Idle
+EXE processing instruction 0-> sub $sp $sp $at
+ID decoding instruction 1-> sw $a0 0 $sp
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 2-> sub $sp $sp $at
+Clock cycle 4
+WB Idle
+MEM processing instruction 0-> sub $sp $sp $at
+EXE processing instruction 1-> sw $a0 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 2-> sub $sp $sp $at
+	Use forwarded data from MEM-WB latch instead of $sp: op1
+IF fetching instruction 3-> sw $a1 0 $sp
+Clock cycle 5
+WB processing instruction 0-> sub $sp $sp $at
+	 writing 4095 to register $sp
+MEM processing instruction 1-> sw $a0 0 $sp
+	Storing 0 to memory location 4095
+EXE processing instruction 2-> sub $sp $sp $at
+	Using data forwarded by MEM-WB latch instead of op1
+ID decoding instruction 3-> sw $a1 0 $sp
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 4-> add $v0 $v0 $at
+Clock cycle 6
+WB processing instruction 1-> sw $a0 0 $sp
+MEM processing instruction 2-> sub $sp $sp $at
+EXE processing instruction 3-> sw $a1 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 4-> add $v0 $v0 $at
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 7
+WB processing instruction 2-> sub $sp $sp $at
+	 writing 4094 to register $sp
+MEM processing instruction 3-> sw $a1 0 $sp
+	Storing 1 to memory location 4094
+EXE processing instruction 4-> add $v0 $v0 $at
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 8
+WB processing instruction 3-> sw $a1 0 $sp
+MEM processing instruction 4-> add $v0 $v0 $at
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 9
+WB processing instruction 4-> add $v0 $v0 $at
+	 writing 1 to register $v0
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 10
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 1 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 11
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4093 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 1 to memory location 4093
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 12
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 1 from memory location 4094
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 13
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 1 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 1 from memory location 4093
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 14
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 1 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+ID Idle
+IF fetching instruction 12-> j label2
+Clock cycle 15
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 2 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID decoding instruction 12-> j label2
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 16
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE processing instruction 12-> j label2
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 17
+WB Idle
+MEM processing instruction 12-> j label2
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 18
+WB processing instruction 12-> j label2
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 19
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 2 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 20
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4092 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 2 to memory location 4092
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 21
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 1 from memory location 4093
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 22
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 1 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 2 from memory location 4092
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 23
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 2 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+ID Idle
+IF fetching instruction 12-> j label2
+Clock cycle 24
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 3 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID decoding instruction 12-> j label2
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 25
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE processing instruction 12-> j label2
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 26
+WB Idle
+MEM processing instruction 12-> j label2
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 27
+WB processing instruction 12-> j label2
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 28
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 3 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 29
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4091 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 3 to memory location 4091
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 30
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 2 from memory location 4092
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 31
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 2 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 3 from memory location 4091
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 32
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 3 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+ID Idle
+IF fetching instruction 12-> j label2
+Clock cycle 33
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 4 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID decoding instruction 12-> j label2
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 34
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE processing instruction 12-> j label2
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 35
+WB Idle
+MEM processing instruction 12-> j label2
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 36
+WB processing instruction 12-> j label2
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 37
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 5 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 38
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4090 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 5 to memory location 4090
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 39
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 3 from memory location 4091
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 40
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 3 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 5 from memory location 4090
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 41
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 5 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+ID Idle
+IF fetching instruction 12-> j label2
+Clock cycle 42
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 5 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID decoding instruction 12-> j label2
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 43
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE processing instruction 12-> j label2
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 44
+WB Idle
+MEM processing instruction 12-> j label2
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 45
+WB processing instruction 12-> j label2
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 46
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 8 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 47
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4089 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 8 to memory location 4089
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 48
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 5 from memory location 4090
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 49
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 5 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 8 from memory location 4089
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 50
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 8 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+ID Idle
+IF fetching instruction 12-> j label2
+Clock cycle 51
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 6 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID decoding instruction 12-> j label2
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 52
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE processing instruction 12-> j label2
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 53
+WB Idle
+MEM processing instruction 12-> j label2
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 54
+WB processing instruction 12-> j label2
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 55
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 13 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 56
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4088 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 13 to memory location 4088
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 57
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 8 from memory location 4089
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 58
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 8 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 13 from memory location 4088
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 59
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 13 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+ID Idle
+IF fetching instruction 12-> j label2
+Clock cycle 60
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 7 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID decoding instruction 12-> j label2
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 61
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE processing instruction 12-> j label2
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 62
+WB Idle
+MEM processing instruction 12-> j label2
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 63
+WB processing instruction 12-> j label2
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 64
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 21 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 65
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4087 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 21 to memory location 4087
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 66
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 13 from memory location 4088
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 67
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 13 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 21 from memory location 4087
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 68
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 21 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+ID Idle
+IF fetching instruction 12-> j label2
+Clock cycle 69
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 8 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID decoding instruction 12-> j label2
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 70
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE processing instruction 12-> j label2
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 71
+WB Idle
+MEM processing instruction 12-> j label2
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 72
+WB processing instruction 12-> j label2
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 73
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 34 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 74
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4086 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 34 to memory location 4086
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 75
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 21 from memory location 4087
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 76
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 21 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 34 from memory location 4086
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 77
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 34 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+ID Idle
+IF fetching instruction 12-> j label2
+Clock cycle 78
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 9 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID decoding instruction 12-> j label2
+IF fetching instruction 5-> add $a2 $a1 $a0
+Clock cycle 79
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE processing instruction 12-> j label2
+ID decoding instruction 5-> add $a2 $a1 $a0
+IF fetching instruction 6-> sub $sp $sp $at
+Clock cycle 80
+WB Idle
+MEM processing instruction 12-> j label2
+EXE processing instruction 5-> add $a2 $a1 $a0
+ID decoding instruction 6-> sub $sp $sp $at
+IF fetching instruction 7-> sw $a2 0 $sp
+Clock cycle 81
+WB processing instruction 12-> j label2
+MEM processing instruction 5-> add $a2 $a1 $a0
+EXE processing instruction 6-> sub $sp $sp $at
+ID decoding instruction 7-> sw $a2 0 $sp
+	Use forwarded data from post-WB latch instead of sw data in: $a2
+	Use forwarded data from EX-MEM latch instead of $sp: op2
+IF fetching instruction 8-> lw $a0 1 $sp
+Clock cycle 82
+WB processing instruction 5-> add $a2 $a1 $a0
+	 writing 55 to register $a2
+MEM processing instruction 6-> sub $sp $sp $at
+EXE processing instruction 7-> sw $a2 0 $sp
+	Using data forwarded by EX-MEM latch instead of op2
+ID decoding instruction 8-> lw $a0 1 $sp
+	Use forwarded data from MEM-WB latch instead of $sp: op2
+IF fetching instruction 9-> lw $a1 0 $sp
+Clock cycle 83
+WB processing instruction 6-> sub $sp $sp $at
+	 writing 4085 to register $sp
+MEM processing instruction 7-> sw $a2 0 $sp
+Using data forwarded by post-WB latch
+	Storing 55 to memory location 4085
+EXE processing instruction 8-> lw $a0 1 $sp
+	Using data forwarded by MEM-WB latch instead of op2
+ID decoding instruction 9-> lw $a1 0 $sp
+IF fetching instruction 10-> add $v0 $v0 $at
+Clock cycle 84
+WB processing instruction 7-> sw $a2 0 $sp
+MEM processing instruction 8-> lw $a0 1 $sp
+	Loading 34 from memory location 4086
+EXE processing instruction 9-> lw $a1 0 $sp
+ID decoding instruction 10-> add $v0 $v0 $at
+IF fetching instruction 11-> beq $v0 $v1 label3
+Clock cycle 85
+WB processing instruction 8-> lw $a0 1 $sp
+	 writing 34 to register $a0
+MEM processing instruction 9-> lw $a1 0 $sp
+	Loading 55 from memory location 4085
+EXE processing instruction 10-> add $v0 $v0 $at
+ID decoding instruction 11-> beq $v0 $v1 label3
+	Use forwarded data from EX-MEM latch instead of $v0: op1
+This is a conditional Branch
+IF Stalling
+Clock cycle 86
+WB processing instruction 9-> lw $a1 0 $sp
+	 writing 55 to register $a1
+MEM processing instruction 10-> add $v0 $v0 $at
+EXE processing instruction 11-> beq $v0 $v1 label3
+	Using data forwarded by EX-MEM latch instead of op1
+	Branching to: 00
+ID Idle
+IF Sending done signal
+Clock cycle 87
+WB processing instruction 10-> add $v0 $v0 $at
+	 writing 10 to register $v0
+MEM processing instruction 11-> beq $v0 $v1 label3
+EXE Idle
+ID Sending done signal
+IF Sending done signal
+Clock cycle 88
+WB processing instruction 11-> beq $v0 $v1 label3
+MEM Idle
+EXE Sending done signal
+ID Sending done signal
+IF Sending done signal
+Clock cycle 89
+WB Idle
+MEM Sending done signal
+EXE Sending done signal
+ID Sending done signal
+IF Sending done signal
+Clock cycle 90
+WB Sending done signal
+MEM Sending done signal
+EXE Sending done signal
+ID Sending done signal
+IF Sending done signal

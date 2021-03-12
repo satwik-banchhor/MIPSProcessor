@@ -1,0 +1,15 @@
+sub $sp $sp $at
+sw $a0 0 $sp
+sub $sp $sp $at
+sw $a1 0 $sp
+add $v0 $v0 $at
+label2 :
+add $a2 $a1 $a0
+sub $sp $sp $at
+sw $a2 0 $sp
+lw $a0 1 $sp
+lw $a1 0 $sp
+add $v0 $v0 $at
+beq $v0 $v1 label3
+j label2
+label3 :

@@ -1,0 +1,5 @@
+Toal Cycles: 89
+No of instruction executed: 76
+Average instruction per cycle: 0.853933
+Hit Count: 29
+Miss Count: 0

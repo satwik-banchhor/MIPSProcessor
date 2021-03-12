@@ -1,0 +1,15 @@
+add 16
+sub 23
+sll 3
+srl 4
+sw 5
+lw 6
+j 7
+jal 8
+jr 9
+beq 10
+bne 11
+bgt 12
+bge 13
+blt 14
+ble 15

@@ -1,0 +1,5 @@
+Conventions:
+	1. Labels should be defined as
+		label: (no spaces before of after \label\)
+	2. No additional spaces after the last instruction
+	3. jr register was not updated in the last 2 cycles
